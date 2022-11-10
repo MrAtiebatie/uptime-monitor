@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('site_id')->constrained();
             $table->boolean('query_found');
-            $table->longText('response_body');
-            $table->longText('screenshot_data');
+            $table->longText('response_body')->nullable();
+            $table->longText('screenshot_data')->nullable();
             $table->timestamps();
         });
     }

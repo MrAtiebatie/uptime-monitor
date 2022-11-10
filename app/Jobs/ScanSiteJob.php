@@ -51,12 +51,13 @@ class ScanSiteJob implements ShouldQueue
 
             $source = $driver->getPageSource();
             $screenshot = $driver->takeScreenshot();
+            $queryFound = str_contains($source, $this->site->search_query);
 
             ScanResult::create([
                 'site_id' => $this->site->id,
-                'query_found' => str_contains($source, $this->site->search_query),
-                'response_body' => $source,
-                'screenshot_data' => base64_encode($screenshot),
+                'query_found' => $queryFound,
+                'response_body' => $queryFound ?: $source,
+                'screenshot_data' => $queryFound ?: base64_encode($screenshot),
             ]);
         } catch (\Exception $e) {
             logs()->error($e->getMessage(), [$e]);

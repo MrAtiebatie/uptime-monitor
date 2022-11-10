@@ -16,8 +16,7 @@ class SiteResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'status' => 'status',
-            'status_class' => 'bg-green-400',
+            'last_scan' => new ScanResultResource($this->whenLoaded('last_scan_result')),
             'url' => $this->url,
             'search_query' => $this->search_query,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),

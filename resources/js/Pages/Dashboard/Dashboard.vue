@@ -57,7 +57,7 @@ export default {
                             <tbody>
                                 <tr v-for="site in sites" :key="site.id" class="group">
                                     <TableCell>
-                                        <span class="block h-2 w-2 rounded-full" :class="site.status_class"></span>
+                                        <span class="block h-2 w-2 rounded-full" :class="site.last_scan?.query_found_class"></span>
                                     </TableCell>
                                     <TableCell>{{ site.url }}</TableCell>
                                     <TableCell>{{ site.search_query }}</TableCell>

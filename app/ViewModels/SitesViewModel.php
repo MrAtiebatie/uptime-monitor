@@ -16,7 +16,9 @@ class SitesViewModel extends ViewModel
 
     public function sites()
     {
-        $sites = Site::whereTeamId($this->request->user()->current_team_id)->get();
+        $sites = Site::whereTeamId($this->request->user()->current_team_id)
+            ->with('last_scan_result')
+            ->get();
 
         $sites->transform(fn (Site $site) => new SiteResource($site));
 
